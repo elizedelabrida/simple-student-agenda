@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">simple-student-agenda</string>
+    <string name="remove">Remove</string>
+    <string name="name">Name</string>
+    <string name="email">E-mail</string>
+    <string name="save">Save</string>
+    <string name="phone">Phone</string>
+    <string name="add_student">Add student</string>
+</resources>
