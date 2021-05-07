@@ -16,19 +16,39 @@
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
             android:hint="@string/name"
+            android:importantForAutofill="no"
             android:inputType="textCapWords"
-            app:layout_constraintTop_toTopOf="parent"
-            android:importantForAutofill="no" />
+            app:layout_constraintTop_toTopOf="parent" />
 
         <EditText
-            android:id="@+id/activity_list_student_telephone"
+            android:id="@+id/activity_list_student_surname"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="8dp"
-            android:hint="@string/phone"
+            android:hint="@string/surname"
+            android:importantForAutofill="no"
+            android:inputType="textCapWords"
+            app:layout_constraintTop_toBottomOf="@+id/activity_list_student_name" />
+
+        <EditText
+            android:id="@+id/activity_list_student_landline_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/landline_number"
+            android:importantForAutofill="no"
             android:inputType="phone"
-            app:layout_constraintTop_toBottomOf="@+id/activity_list_student_name"
-            android:importantForAutofill="no" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_list_student_surname" />
+
+        <EditText
+            android:id="@+id/activity_list_student_mobile_number"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:hint="@string/mobile_number"
+            android:importantForAutofill="no"
+            android:inputType="phone"
+            app:layout_constraintTop_toBottomOf="@+id/activity_list_student_landline_number" />
 
         <EditText
             android:id="@+id/activity_list_student_email"
@@ -37,9 +57,10 @@
             android:layout_margin="8dp"
             android:layout_marginTop="16dp"
             android:hint="@string/email"
+            android:importantForAutofill="no"
             android:inputType="textEmailAddress"
-            app:layout_constraintTop_toBottomOf="@+id/activity_list_student_telephone"
-            android:importantForAutofill="no" />
+            app:layout_constraintTop_toBottomOf="@+id/activity_list_student_mobile_number" />
+
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </ScrollView>

@@ -1,12 +1,58 @@
 package com.elize.simple_student_agenda.model;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import androidx.annotation.NonNull;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
 
-import java.io.Serializable;
+import java.util.Calendar;
 
-public class Student implements Serializable {
+@Entity
+public class Student implements Parcelable {
+    @PrimaryKey(autoGenerate = true)
+    private int id = 0;
+    private String name;
+    private String surname;
+    private String mail;
+    private Calendar dateCreated = Calendar.getInstance();
+
     public Student() {
+    }
 
+    public Student(Parcel in) {
+        id = in.readInt();
+        name = in.readString();
+        surname = in.readString();
+        mail = in.readString();
+        dateCreated.setTimeInMillis(in.readLong());
+    }
+
+    public static final Parcelable.Creator<Student>
+            CREATOR = new Parcelable.Creator<Student>() {
+
+        public Student createFromParcel(Parcel in) {
+            return new Student(in);
+        }
+
+        public Student[] newArray(int size) {
+            return new Student[size];
+        }
+    };
+
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel dest, int flags) {
+        dest.writeInt(id);
+        dest.writeString(name);
+        dest.writeString(surname);
+        dest.writeString(mail);
+        dest.writeLong(dateCreated.getTimeInMillis());
     }
 
     public int getId() {
@@ -17,10 +63,6 @@ public class Student implements Serializable {
         this.id = id;
     }
 
-    public void setPhone(String phone) {
-        this.phone = phone;
-    }
-
     public void setMail(String mail) {
         this.mail = mail;
     }
@@ -29,36 +71,41 @@ public class Student implements Serializable {
         this.name = name;
     }
 
-    private int id = 0;
-    private String name;
-    private String phone;
-    private String mail;
-
     public String getName() {
         return name;
-    }
-
-    public String getPhone() {
-        return phone;
     }
 
     public String getMail() {
         return mail;
     }
 
-    public Student(String name, String phone, String mail) {
-        this.name = name;
-        this.phone = phone;
-        this.mail = mail;
+    public String getSurname() {
+        return surname;
+    }
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public Calendar getDateCreated() {
+        return dateCreated;
+    }
+
+    public void setDateCreated(Calendar dateCreated) {
+        this.dateCreated = dateCreated;
+    }
+
+    public String getCompleteName() {
+        return name + " " + surname;
+    }
+
+    public boolean hasId() {
+        return id > 0;
     }
 
     @NonNull
     @Override
     public String toString() {
         return name;
-    }
-
-    public boolean hasId() {
-        return id > 0;
     }
 }

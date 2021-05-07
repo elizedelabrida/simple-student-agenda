@@ -4,6 +4,8 @@
     <string name="name">Name</string>
     <string name="email">E-mail</string>
     <string name="save">Save</string>
-    <string name="phone">Phone</string>
     <string name="add_student">Add student</string>
+    <string name="surname">Surname</string>
+    <string name="mobile_number">Mobile number</string>
+    <string name="landline_number">Landline number</string>
 </resources>

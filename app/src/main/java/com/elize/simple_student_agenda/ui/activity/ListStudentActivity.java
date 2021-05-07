@@ -20,12 +20,13 @@ import static com.elize.simple_student_agenda.ui.activity.Constants.STUDENT_KEY;
 public class ListStudentActivity extends AppCompatActivity {
 
     public static final String APPBAR_TITLE = "Student List";
-    private final ListStudentView listStudentView = new ListStudentView(this);
+    private ListStudentView listStudentView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setTitle(APPBAR_TITLE);
+        listStudentView = new ListStudentView(this);
         setContentView(R.layout.activity_list_student);
         configureFabNewStudentButton();
         configureStudentList();

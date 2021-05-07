@@ -1,2 +1,2 @@
 # simple-student-agenda
- Simple project to apply Android Java basics
+ Study project for Room & Async Tasks and others

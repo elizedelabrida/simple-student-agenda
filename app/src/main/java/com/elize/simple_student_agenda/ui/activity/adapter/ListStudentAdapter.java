@@ -7,6 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 
 import com.elize.simple_student_agenda.R;
+import com.elize.simple_student_agenda.asynctask.GetStudentFirstPhoneTask;
+import com.elize.simple_student_agenda.database.StudentAgendaDatabase;
+import com.elize.simple_student_agenda.database.dao.RoomPhoneDAO;
 import com.elize.simple_student_agenda.model.Student;
 
 import java.util.ArrayList;
@@ -15,9 +18,11 @@ import java.util.List;
 public class ListStudentAdapter extends BaseAdapter {
     private final List<Student> listStudents = new ArrayList<>();
     private final Context context;
+    final RoomPhoneDAO roomPhoneDAO;
 
     public ListStudentAdapter(Context context) {
         this.context = context;
+        roomPhoneDAO = StudentAgendaDatabase.getInstance(context).getRoomPhoneDAO();
     }
 
     @Override
@@ -55,8 +60,10 @@ public class ListStudentAdapter extends BaseAdapter {
 
     private void fulfillView(int position, ListStudentViewHolder holder) {
         Student returnedStudent = listStudents.get(position);
-        holder.textViewName.setText(returnedStudent.getName());
-        holder.textViewPhone.setText(returnedStudent.getPhone());
+        holder.textViewName.setText(returnedStudent.getCompleteName());
+        new GetStudentFirstPhoneTask(returnedStudent.getId(), roomPhoneDAO,
+                phone -> holder.textViewPhone.setText(phone.getNumber())).execute();
+
     }
 
     public void update(List<Student> listStudentsUpdated) {

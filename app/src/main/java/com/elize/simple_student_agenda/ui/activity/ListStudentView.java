@@ -8,20 +8,23 @@ import android.widget.ListView;
 
 import androidx.annotation.NonNull;
 
-import com.elize.simple_student_agenda.dao.StudentDAO;
+import com.elize.simple_student_agenda.asynctask.GetStudentTask;
+import com.elize.simple_student_agenda.asynctask.RemoveStudentTask;
+import com.elize.simple_student_agenda.database.StudentAgendaDatabase;
+import com.elize.simple_student_agenda.database.dao.RoomStudentDAO;
 import com.elize.simple_student_agenda.model.Student;
 import com.elize.simple_student_agenda.ui.activity.adapter.ListStudentAdapter;
 
 public class ListStudentView {
 
-    private final StudentDAO studentDAO;
+    private final RoomStudentDAO studentDAO;
     private final ListStudentAdapter adapter;
     private final Context context;
 
     public ListStudentView(Context context) {
         this.context = context;
         this.adapter = new ListStudentAdapter(this.context);
-        this.studentDAO = new StudentDAO();
+        this.studentDAO = StudentAgendaDatabase.getInstance(context).getRoomStudentDAO();
     }
 
     public void confirmRemoval(@NonNull final MenuItem item) {
@@ -40,12 +43,11 @@ public class ListStudentView {
     }
 
     public void updateStudent() {
-        adapter.update(studentDAO.listAll());
+        new GetStudentTask(studentDAO, adapter).execute();
     }
 
     private void removeStudent(Student student) {
-        studentDAO.remove(student);
-        adapter.remove(student);
+        new RemoveStudentTask(studentDAO, adapter, student).execute();
     }
 
     public void configureAdapter(ListView listViewStudents) {
